@@ -27,7 +27,7 @@ library(ggeffects)
 job_search <- read_csv(here("data", "personal-data.csv"))
 ```
 
-## 2b. First plot outside engagements
+## 2b. Scatterplot for outside engagements
 
 ```{r}
 #| label: first-visualization
@@ -45,7 +45,7 @@ ggplot(data = job_search,
          panel.grid.minor = element_blank())
 ```
 
-## 2b. Ridgeline graph for stress
+## 2c. Ridgeline graph for stress
 
 ```{r}
 job_search_clean <- job_search |>
@@ -64,7 +64,12 @@ job_search_clean <- job_search |>
 ggplot(data = job_search_clean,
        mapping = aes(x = job_search,
                      y = stress)) +
-  geom_density_ridges_gradient(fill = "turquoise4") +
+  geom_density_ridges_gradient(color = "darkslategray4",
+                               fill = "darkslategray3") +
+  labs(title = "Job search differs by level of stress",
+       x = "Time spent on job search (minutes)",
+       y = "Level of stress"
+       ) +
   theme_linedraw() +
   theme(panel.grid.major = element_blank(),
          panel.grid.minor = element_blank())
