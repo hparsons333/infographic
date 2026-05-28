@@ -14,6 +14,7 @@ library(readxl)
 library(ggplot2)
 library(ggridges)
 library(here)
+library(corrplot)
 library(rstatix)
 library(ggeffects)
 ```
@@ -73,5 +74,17 @@ ggplot(data = job_search_clean,
   theme_linedraw() +
   theme(panel.grid.major = element_blank(),
          panel.grid.minor = element_blank())
+```
+
+## 2d. Correlogram
+
+```{r}
+job_search_corr <- job_search |>
+  select(job_search, outside_eng, stress, sleep, social_media, day_to_grad)
+```
+
+```{r}
+
+corrplot(cor(job_search))
 ```
 
