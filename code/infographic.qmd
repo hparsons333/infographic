@@ -11,8 +11,10 @@ format: pdf
 #| warning: false
 library(tidyverse)
 library(readxl)
+library(here)
 library(rstatix)
 library(ggeffects)
+library(corrplot)
 ```
 
 # 2: Visualizations
@@ -21,7 +23,50 @@ library(ggeffects)
 ```{r}
 #| label: object-for-data
 
+job_search <- read_csv(here("data", "personal-data.csv"))
+```
 
-job_search <- read_csv("here", "personal-data.csv")
+## 2b. First plot outside engagements
+
+```{r}
+#| label: first-visualization
+
+ggplot(data = job_search,
+                        mapping = aes(x = outside_eng,
+                                      y = job_search)) +
+  geom_point(color = "turquoise4",
+              size = 1.5) +
+  labs(title = "Affect of outside engagements on job search",
+       x = "Time spent at work or school (hours)",
+       y = "Time spent on job search (min)") + 
+  theme_linedraw() +
+  theme(panel.grid.major = element_blank(),
+         panel.grid.minor = element_blank())
+```
+
+## 2c. Stress
+
+```{r}
+#| label: second-visualization
+
+ggplot(data = job_search,
+                        mapping = aes(x = stress,
+                                      y = job_search)) +
+  geom_jitter(color = "darkred",
+              height = 0,
+              width = 0.1, 
+              size = 1.5) +
+  labs(title = "Affect of stress on job search",
+       x = "Stress (Scale of 1-5)",
+       y = "Time spent on job search (min)") +
+  theme_linedraw() +
+  theme(panel.grid.major = element_blank(),
+         panel.grid.minor = element_blank())
+```
+
+## 2d. Correlogram
+
+```{r}
+ 
 ```
 
