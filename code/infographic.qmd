@@ -81,10 +81,17 @@ ggplot(data = job_search_clean,
 ```{r}
 job_search_corr <- job_search |>
   select(job_search, outside_eng, stress, sleep, social_media, day_to_grad)
+
+names(job_search_corr) <- c("Job search", "Outside engagements", "Stress", "Sleep", "Social media usage", "Days till graduation")
 ```
 
 ```{r}
 
-corrplot(cor(job_search))
+colour_set <- colorRampPalette(colors = c("#8B0000",  "#CD0000", "#BF3EFF", "#009ACD", "#00688B"))
+
+#009ACD
+corrplot(cor(job_search_corr),
+         type = "lower",
+         col = colour_set(100))
 ```
 
